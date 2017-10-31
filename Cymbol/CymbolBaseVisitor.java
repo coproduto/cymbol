@@ -10,6 +10,9 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * operations with no return type.
  */
 public class CymbolBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements CymbolVisitor<T> {
+	
+	protected static final List<Token> funcIDs = new ArrayList<Token>();
+	
 	/**
 	 * {@inheritDoc}
 	 *
@@ -44,7 +47,22 @@ public class CymbolBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFuncDecl(CymbolParser.FuncDeclContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFuncDecl(CymbolParser.FuncDeclContext ctx) { 
+		boolean hasItem = false;
+		Iterator<Token> funcIDsAsIterator = funcIDs.iterator();
+	    while (funcIDsAsIterator.hasNext()){
+			  Token it = funcIDsAsIterator.next();
+			  if (it == ctx.getSymbol())
+				hasItem = true;
+	    }
+		
+		if (!hasItem){
+			//Escrever no arquivo: "n" + funcIDs.length + "[label=\"" + ctx.type() + ctx.getSymbol().getText() + "(" + ctx.paramTypeList().paramType() + ")\"];"
+			funcIDs.Add(ctx.getSymbol());
+		}
+		
+		return visitChildren(ctx); 
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -142,7 +160,11 @@ public class CymbolBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunctionCallExpr(CymbolParser.FunctionCallExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunctionCallExpr(CymbolParser.FunctionCallExprContext ctx) { 
+		
+		return visitChildren(ctx); 
+	
+	}
 	/**
 	 * {@inheritDoc}
 	 *
