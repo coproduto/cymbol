@@ -30,6 +30,10 @@ public class CallGraph {
 		return argCounts.get(funcName);
 	}
 	
+	private Integer argumentCount(CymbolParser.ParamTypeListContext args) {
+		return new Integer(args.paramType().size());
+	}
+	
 	public boolean declareToken(
 			Token funcDecl, 
 			CymbolParser.TypeContext type, 
@@ -40,7 +44,7 @@ public class CallGraph {
 			funcNames.add(name);
 			funcTypes.put(name, type.getText());
 			if(arguments != null) {
-				argCounts.put(name, new Integer(arguments.getChildCount()));
+				argCounts.put(name, this.argumentCount(arguments));
 			} else {
 				argCounts.put(name, new Integer(0));
 			}
@@ -63,9 +67,7 @@ public class CallGraph {
 		
 		if(!callees.contains(calleeName)) {
 			callees.add(calleeName);
-		} else {
-			System.out.println("Dropped repeated call from " + callerName + " to " + calleeName);
-		}
+		} 
 		
 		funcCalls.put(callerName, callees);
 	}

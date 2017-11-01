@@ -1,6 +1,9 @@
 package application;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -10,7 +13,15 @@ import graph.GraphWriter;
 import walker.CymbolCallGraphVisitor;
 
 public class CymbolCallGraphGen {
-    public static ANTLRInputStream getStandardInputStream() throws IOException {
+	private static void printUsage() {
+		System.out.println(
+			"Usage: \n" +
+		    "\tjava callgraph.jar input-file.cym\n\n" +
+		    "\tthis will generate input-file.gv and input-file.png.\n\n"
+		);
+	}
+	
+	public static ANTLRInputStream getStandardInputStream() throws IOException {
         return (new ANTLRInputStream(System.in));
     }
 
@@ -19,20 +30,38 @@ public class CymbolCallGraphGen {
     }
 
     public static void main(String[] args) throws IOException {
-    	System.out.println("Awaiting input.");
-    	
-        ANTLRInputStream input = getStandardInputStream();
-        CymbolLexer lexer = new CymbolLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        CymbolParser parser = new CymbolParser(tokens);
-        GraphWriter writer = new GraphWriter();
+    	if(args.length < 1) {
+    		System.out.println("No input file specified.\n\n");
+    		CymbolCallGraphGen.printUsage();
+    	} else {
+    		ANTLRInputStream input = getFileInputStream(args[0]);
+    		File inputFile = new File(args[0]);
+    		String[] outputFileNameComponents = inputFile.getName().split("\\.");
+    		StringBuilder sb = new StringBuilder();
+    		for(int i = 0; i < outputFileNameComponents.length - 1; i++) {
+    			sb.append(outputFileNameComponents[i]);
+    			if(i < outputFileNameComponents.length - 2) {
+    				sb.append(".");
+    			}
+    		}
+    		String outputFileName = sb.toString();
+    				
+    		CymbolLexer lexer = new CymbolLexer(input);
+    		CommonTokenStream tokens = new CommonTokenStream(lexer);
+    		CymbolParser parser = new CymbolParser(tokens);
+    		GraphWriter writer = new GraphWriter();
         
-        ParseTree tree = parser.file();
+    		ParseTree tree = parser.file();
 
-        CymbolCallGraphVisitor visitor = new CymbolCallGraphVisitor();
-        CallGraph graph = tree.accept(visitor);
+    		CymbolCallGraphVisitor visitor = new CymbolCallGraphVisitor();
+    		CallGraph graph = tree.accept(visitor);
         
-        System.out.println(writer.writeDotFileContents(graph));
-        System.out.println("Done.");
+    		String dotFileContents = writer.writeDotFileContents(graph, outputFileName);
+    		PrintWriter out = new PrintWriter(outputFileName + ".gv");
+    		out.println(dotFileContents);
+    		out.close();
+    		
+    		System.out.println("Done.");
+    	}
     }
 }

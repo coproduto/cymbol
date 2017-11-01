@@ -11,15 +11,13 @@ public class CymbolCallGraphVisitor extends CymbolBaseVisitor<CallGraph> {
 	private Token currentFunc = null;
 	
 	@Override public CallGraph visitFile(CymbolParser.FileContext ctx) {
-		System.out.println("Entering file");
 		visitChildren(ctx);
-		System.out.println("Exiting file");
 		return graph;
 	}
 	
     @Override public CallGraph visitFuncDecl(CymbolParser.FuncDeclContext ctx) { 
     	if(!graph.declareToken(ctx.ID().getSymbol(), ctx.type(), ctx.paramTypeList())) {
-    		System.out.println("Dropped repeated token " + ctx.ID().getSymbol());
+    		System.out.println("Dropped repeated identifier " + ctx.ID().getSymbol());
     	}
 		
         currentFunc = ctx.ID().getSymbol();

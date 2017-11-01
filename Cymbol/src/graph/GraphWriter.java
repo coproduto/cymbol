@@ -17,7 +17,7 @@ public class GraphWriter {
 		}
 		return ("n" + index + 
 				" [label=\"" + type + " " + name + "(" + args + ")\"]"
-				+ "\n");
+				+ ";\n");
 	}
 	
 	private String writeNode(CallGraph g, String functionName, int nodeIndex) {
@@ -30,11 +30,6 @@ public class GraphWriter {
 			System.out.println("No type info for function " + functionName);
 			type = "void";
 		} 
-		
-		if(argCount == null) {
-			System.out.println("No argument count for function " + functionName);
-			argCount = 0;
-		}
 		
 		return formatNode(nodeIndex, type, functionName, argCount);
 	}
@@ -52,18 +47,18 @@ public class GraphWriter {
 		}
 		
 		if(callerNode != null && calleeNode != null) {
-			return callerNode + " -> " + calleeNode;
+			return callerNode + " -> " + calleeNode + ";\n";
 		} else {
-			return "?? -> ??";
+			return "?? -> ??;\n";
 		}
 	}
 	
 	
 	
-	public String writeDotFileContents(CallGraph g) {
+	public String writeDotFileContents(CallGraph g, String name) {
 		String file = "";
 		
-		file = file + "digraph CallGraph {\n";
+		file = file + "digraph " + name + " {\n";
 		Iterator<String> functionNameIterator = g.getDeclaredFunctions().iterator();
 		Iterator<Map.Entry<String, List<String>>> functionCallIterator = g.getFunctionCalls().entrySet().iterator();
 		int nodeIndex = 1;
@@ -71,9 +66,6 @@ public class GraphWriter {
 			String functionName = functionNameIterator.next();
 			file = file + this.writeNode(g, functionName, nodeIndex);
 			nodeIndex += 1;
-		}
-		if(nodeIndex > 1) {
-			file = file + "\n";
 		}
 		int writtenCalls = 0;
 		while(functionCallIterator.hasNext()) {
@@ -85,7 +77,7 @@ public class GraphWriter {
 			}
 			writtenCalls += 1;
 		}
-		if(writtenCalls > 0) {
+		if(writtenCalls == 0 && nodeIndex == 1) {
 			file = file + "\n";
 		}
 		
