@@ -18,7 +18,7 @@ public class CymbolCallGraphVisitor extends CymbolBaseVisitor<CallGraph> {
 	}
 	
     @Override public CallGraph visitFuncDecl(CymbolParser.FuncDeclContext ctx) { 
-    	if(!graph.declareToken(ctx.ID().getSymbol())) {
+    	if(!graph.declareToken(ctx.ID().getSymbol(), ctx.type(), ctx.paramTypeList())) {
     		System.out.println("Dropped repeated token " + ctx.ID().getSymbol());
     	}
 		
