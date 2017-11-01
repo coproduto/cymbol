@@ -147,8 +147,21 @@ public class CymbolBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 */
 	@Override public T visitFunctionCallExpr(CymbolParser.FunctionCallExprContext ctx) { 
 		
+		int origin, destination, i = 1;
+		
+		Iterator<Token> funcIDsAsIterator = funcIDs.iterator();
+	    while (funcIDsAsIterator.hasNext()){
+			Token it = funcIDsAsIterator.next();
+			if (it == ctx.ID().getSymbol())
+				destination = i;
+			/*if (it == ctx.ID().getSymbol())
+				origin = i;*/
+			i++;
+	    }
+		
+		//Escrever no arquivo: "n" + origin + " -> n" + destination +";"
+		
 		return visitChildren(ctx); 
-	
 	}
 	/**
 	 * {@inheritDoc}
