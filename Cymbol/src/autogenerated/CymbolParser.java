@@ -110,9 +110,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_file; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitFile(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterFile(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitFile(this);
 		}
 	}
 
@@ -185,9 +188,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_varDecl; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitVarDecl(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterVarDecl(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitVarDecl(this);
 		}
 	}
 
@@ -243,18 +249,24 @@ public class CymbolParser extends Parser {
 		public TerminalNode TYPEINT() { return getToken(CymbolParser.TYPEINT, 0); }
 		public FormTypeIntContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitFormTypeInt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterFormTypeInt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitFormTypeInt(this);
 		}
 	}
 	public static class FormTypeVoidContext extends TypeContext {
 		public TerminalNode TYPEVOID() { return getToken(CymbolParser.TYPEVOID, 0); }
 		public FormTypeVoidContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitFormTypeVoid(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterFormTypeVoid(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitFormTypeVoid(this);
 		}
 	}
 
@@ -311,9 +323,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_funcDecl; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitFuncDecl(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterFuncDecl(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitFuncDecl(this);
 		}
 	}
 
@@ -368,9 +383,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_paramTypeList; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitParamTypeList(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterParamTypeList(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitParamTypeList(this);
 		}
 	}
 
@@ -422,9 +440,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_paramType; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitParamType(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterParamType(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitParamType(this);
 		}
 	}
 
@@ -463,9 +484,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_block; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitBlock(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterBlock(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitBlock(this);
 		}
 	}
 
@@ -517,9 +541,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_assignStat; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitAssignStat(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterAssignStat(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitAssignStat(this);
 		}
 	}
 
@@ -559,9 +586,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_returnStat; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitReturnStat(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterReturnStat(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitReturnStat(this);
 		}
 	}
 
@@ -610,9 +640,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_ifElseStat; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitIfElseStat(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterIfElseStat(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitIfElseStat(this);
 		}
 	}
 
@@ -668,9 +701,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_ifElseExprStat; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitIfElseExprStat(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterIfElseExprStat(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitIfElseExprStat(this);
 		}
 	}
 
@@ -738,9 +774,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_exprStat; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitExprStat(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterExprStat(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitExprStat(this);
 		}
 	}
 
@@ -779,9 +818,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_exprList; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitExprList(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterExprList(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitExprList(this);
 		}
 	}
 
@@ -835,9 +877,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_ifStat; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitIfStat(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterIfStat(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitIfStat(this);
 		}
 	}
 
@@ -879,9 +924,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_elseStat; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitElseStat(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterElseStat(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitElseStat(this);
 		}
 	}
 
@@ -929,9 +977,12 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_stat; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitStat(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterStat(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitStat(this);
 		}
 	}
 
@@ -1008,9 +1059,12 @@ public class CymbolParser extends Parser {
 		}
 		public SignedExprContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitSignedExpr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterSignedExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitSignedExpr(this);
 		}
 	}
 	public static class FunctionCallExprContext extends ExprContext {
@@ -1020,9 +1074,12 @@ public class CymbolParser extends Parser {
 		}
 		public FunctionCallExprContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitFunctionCallExpr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterFunctionCallExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitFunctionCallExpr(this);
 		}
 	}
 	public static class MulDivExprContext extends ExprContext {
@@ -1035,9 +1092,12 @@ public class CymbolParser extends Parser {
 		}
 		public MulDivExprContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitMulDivExpr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterMulDivExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitMulDivExpr(this);
 		}
 	}
 	public static class ComparisonExprContext extends ExprContext {
@@ -1050,9 +1110,12 @@ public class CymbolParser extends Parser {
 		}
 		public ComparisonExprContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitComparisonExpr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterComparisonExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitComparisonExpr(this);
 		}
 	}
 	public static class EqExprContext extends ExprContext {
@@ -1065,9 +1128,12 @@ public class CymbolParser extends Parser {
 		}
 		public EqExprContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitEqExpr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterEqExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitEqExpr(this);
 		}
 	}
 	public static class NotExprContext extends ExprContext {
@@ -1076,18 +1142,24 @@ public class CymbolParser extends Parser {
 		}
 		public NotExprContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitNotExpr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterNotExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitNotExpr(this);
 		}
 	}
 	public static class IntExprContext extends ExprContext {
 		public TerminalNode INT() { return getToken(CymbolParser.INT, 0); }
 		public IntExprContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitIntExpr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterIntExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitIntExpr(this);
 		}
 	}
 	public static class ParenExprContext extends ExprContext {
@@ -1096,9 +1168,12 @@ public class CymbolParser extends Parser {
 		}
 		public ParenExprContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitParenExpr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterParenExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitParenExpr(this);
 		}
 	}
 	public static class AddSubExprContext extends ExprContext {
@@ -1111,18 +1186,24 @@ public class CymbolParser extends Parser {
 		}
 		public AddSubExprContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitAddSubExpr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterAddSubExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitAddSubExpr(this);
 		}
 	}
 	public static class VarIdExprContext extends ExprContext {
 		public TerminalNode ID() { return getToken(CymbolParser.ID, 0); }
 		public VarIdExprContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitVarIdExpr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterVarIdExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitVarIdExpr(this);
 		}
 	}
 
