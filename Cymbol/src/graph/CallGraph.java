@@ -39,7 +39,11 @@ public class CallGraph {
 		if(!funcNames.contains(name)) {
 			funcNames.add(name);
 			funcTypes.put(name, type.getText());
-			argCounts.put(name, new Integer(arguments.getChildCount()));
+			if(arguments != null) {
+				argCounts.put(name, new Integer(arguments.getChildCount()));
+			} else {
+				argCounts.put(name, new Integer(0));
+			}
 			return true;
 		} else {
 			return false;
@@ -51,7 +55,7 @@ public class CallGraph {
 		String calleeName = callee.getText();
 		
 		List<String> callees;
-		if(funcCalls.containsKey(callerName)) {
+		if(!funcCalls.containsKey(callerName)) {
 			callees = new ArrayList<String>();
 		} else {
 			callees = funcCalls.get(callerName);

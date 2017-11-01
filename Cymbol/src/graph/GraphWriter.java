@@ -40,8 +40,8 @@ public class GraphWriter {
 	}
 	
 	private String writeCall(String caller, String callee) {
-		String callerNode = functionsToNodes.get("caller");
-		String calleeNode = functionsToNodes.get("callee");
+		String callerNode = functionsToNodes.get(caller);
+		String calleeNode = functionsToNodes.get(callee);
 		
 		if(callerNode == null) {
 			System.out.println("No node for caller function " + caller);
@@ -72,7 +72,10 @@ public class GraphWriter {
 			file = file + this.writeNode(g, functionName, nodeIndex);
 			nodeIndex += 1;
 		}
-		file = file + "\n";
+		if(nodeIndex > 1) {
+			file = file + "\n";
+		}
+		int writtenCalls = 0;
 		while(functionCallIterator.hasNext()) {
 			Map.Entry<String, List<String>> call = functionCallIterator.next();
 			Iterator<String> calledFunctionsIterator = call.getValue().iterator();
@@ -80,6 +83,10 @@ public class GraphWriter {
 				String calledFunction = calledFunctionsIterator.next();
 				file = file + this.writeCall(call.getKey(), calledFunction);
 			}
+			writtenCalls += 1;
+		}
+		if(writtenCalls > 0) {
+			file = file + "\n";
 		}
 		
 		file = file + "}\n";
