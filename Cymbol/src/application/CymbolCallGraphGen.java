@@ -17,6 +17,8 @@ public class CymbolCallGraphGen {
     }
 
     public static void main(String[] args) throws IOException {
+    	System.out.println("Awaiting input.");
+    	
         ANTLRInputStream input = getStandardInputStream();
         CymbolLexer lexer = new CymbolLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
