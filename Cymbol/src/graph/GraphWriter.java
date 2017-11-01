@@ -15,7 +15,7 @@ public class GraphWriter {
 		} else {
 			args = args + " ";
 		}
-		return ("n" + index + 
+		return ("\tn" + index + 
 				" [label=\"" + type + " " + name + "(" + args + ")\"]"
 				+ ";\n");
 	}
@@ -47,7 +47,7 @@ public class GraphWriter {
 		}
 		
 		if(callerNode != null && calleeNode != null) {
-			return callerNode + " -> " + calleeNode + ";\n";
+			return "\t" + callerNode + " -> " + calleeNode + ";\n";
 		} else {
 			return "?? -> ??;\n";
 		}

@@ -29,7 +29,7 @@ public class CymbolCallGraphGen {
         return (new ANTLRFileStream(filePath));
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
     	if(args.length < 1) {
     		System.out.println("No input file specified.\n\n");
     		CymbolCallGraphGen.printUsage();
@@ -57,11 +57,21 @@ public class CymbolCallGraphGen {
     		CallGraph graph = tree.accept(visitor);
         
     		String dotFileContents = writer.writeDotFileContents(graph, outputFileName);
-    		PrintWriter out = new PrintWriter(outputFileName + ".gv");
+    		String fullOutputFileName = outputFileName + ".gv";
+    		PrintWriter out = new PrintWriter(fullOutputFileName);
     		out.println(dotFileContents);
     		out.close();
     		
-    		System.out.println("Done.");
+    		ProcessBuilder graphVizProcess = new ProcessBuilder(
+    				"dot", 
+    				"-Tpng", 
+    				fullOutputFileName, 
+    				"-o", 
+    				outputFileName + ".png"
+    		);
+    		graphVizProcess.start().waitFor();
+    		
+    		System.out.println("Done.\n");
     	}
     }
 }
